@@ -128,7 +128,12 @@ def createfig2(tsim, filename):
     freq = []
     freq = [float(len(spk_neuron.t[i]))/tsim for i in range(len(spk_neuron))]
     spk_neuron['f'] = freq
-    measures_layer['f'] = spk_neuron.groupby(['layer'])['f'].mean()
+
+    # DEPRECATED: Ambiguity
+    # measures_layer['f'] = spk_neuron.groupby(['layer'])['f'].mean()
+
+    # Specify grouping-by the layer level
+    measures_layer['f'] = spk_neuron.groupby(spk_neuron['layer'])['f'].mean()
 
     # boxplot of firing rates by layer
     bplot = spk_neuron.boxplot(column = 'f', by = 'layer', showmeans=True,
@@ -158,7 +163,11 @@ def createfig2(tsim, filename):
             for i in range(len(spk_neuron))]
     spk_neuron['cv'] = cv
 
-    measures_layer['cv'] = spk_neuron.groupby(['layer'])['cv'].mean()
+    # DEPRECATED: Ambiguity
+    # measures_layer['cv'] = spk_neuron.groupby(['layer'])['cv'].mean()
+
+    # Specify grouping-by the layer level
+    measures_layer['cv'] = spk_neuron.groupby(spk_neuron['layer'])['cv'].mean()
 
     # barplot of mean CV
     plt.subplot2grid((3,2),(1,1))
