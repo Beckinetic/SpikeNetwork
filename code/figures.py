@@ -84,6 +84,9 @@ def createfig2(tsim, filename):
     n_sample = 1000 # number of neurons by layer for sampled measures
     spk_neuron = spk_neuron.groupby(['layer']).apply(lambda x: x.sample(n=n_sample))
 
+    # Reset the index to remove the ambiguity
+    spk_neuron = spk_neuron.reset_index(drop=True)
+
     # measures DataFrame:
     measures_layer = pd.DataFrame(index=lname)
 
@@ -129,11 +132,7 @@ def createfig2(tsim, filename):
     freq = [float(len(spk_neuron.t[i]))/tsim for i in range(len(spk_neuron))]
     spk_neuron['f'] = freq
 
-    # DEPRECATED: Ambiguity
-    # measures_layer['f'] = spk_neuron.groupby(['layer'])['f'].mean()
-
-    # Specify grouping-by the layer level
-    measures_layer['f'] = spk_neuron.groupby(spk_neuron['layer'])['f'].mean()
+    measures_layer['f'] = spk_neuron.groupby(['layer'])['f'].mean()
 
     # boxplot of firing rates by layer
     bplot = spk_neuron.boxplot(column = 'f', by = 'layer', showmeans=True,
@@ -163,11 +162,7 @@ def createfig2(tsim, filename):
             for i in range(len(spk_neuron))]
     spk_neuron['cv'] = cv
 
-    # DEPRECATED: Ambiguity
-    # measures_layer['cv'] = spk_neuron.groupby(['layer'])['cv'].mean()
-
-    # Specify grouping-by the layer level
-    measures_layer['cv'] = spk_neuron.groupby(spk_neuron['layer'])['cv'].mean()
+    measures_layer['cv'] = spk_neuron.groupby(['layer'])['cv'].mean()
 
     # barplot of mean CV
     plt.subplot2grid((3,2),(1,1))
