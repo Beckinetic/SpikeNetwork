@@ -18,6 +18,7 @@
 #
 # Main parameters of simulation is defined in this code.
 # ----------------------------------------------------------------------------
+import gc
 
 from brian2 import *
 from netParams import *

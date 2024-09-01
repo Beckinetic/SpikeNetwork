@@ -19,6 +19,8 @@
 # Definition of different sets of variables to run the experiments presented in
 # the article.
 # ----------------------------------------------------------------------------
+import gc
+
 import matplotlib
 matplotlib.use('Agg')
 
