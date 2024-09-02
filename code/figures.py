@@ -82,7 +82,7 @@ def createfig2(tsim, filename):
     # sampling data:
     psample = 0.025 # percentage of neurons by layer for the raster plot
     n_sample = 1000 # number of neurons by layer for sampled measures
-    spk_neuron = spk_neuron.groupby(['layer']).apply(lambda x: x.sample(n=n_sample))
+    spk_neuron = spk_neuron.groupby(['layer'], observed=False).apply(lambda x: x.sample(n=n_sample))
 
     # Reset the index to remove the ambiguity
     spk_neuron = spk_neuron.reset_index(drop=True)
@@ -132,16 +132,16 @@ def createfig2(tsim, filename):
     freq = [float(len(spk_neuron.t[i]))/tsim for i in range(len(spk_neuron))]
     spk_neuron['f'] = freq
 
-    measures_layer['f'] = spk_neuron.groupby(['layer'])['f'].mean()
+    measures_layer['f'] = spk_neuron.groupby(['layer'], observed=False)['f'].mean()
 
     # boxplot of firing rates by layer
     bplot = spk_neuron.boxplot(column = 'f', by = 'layer', showmeans=True,
                         vert = False, rot = 30, ax = axes[0,1],
                         patch_artist=True, sym='+', return_type='dict', grid=False)
 
-    [bplot[0]['boxes'][i].set_facecolor(dotcolor[i]) for i in range(0,len(bplot[0]['boxes']))]
-    [bplot[0]['means'][i].set_markerfacecolor('white') for i in range(0,len(bplot[0]['boxes']))]
-    [bplot[0]['means'][i].set_markeredgecolor('k') for i in range(0,len(bplot[0]['boxes']))]
+    [bplot[0]['boxes'].iloc[i].set_facecolor(dotcolor.iloc[i]) for i in range(0,len(bplot[0]['boxes']))]
+    [bplot[0]['means'].iloc[i].set_markerfacecolor('white') for i in range(0,len(bplot[0]['boxes']))]
+    [bplot[0]['means'].iloc[i].set_markeredgecolor('k') for i in range(0,len(bplot[0]['boxes']))]
 
     axes[0,1].set_title("")
     axes[0,1].set_ylabel("")
@@ -162,7 +162,7 @@ def createfig2(tsim, filename):
             for i in range(len(spk_neuron))]
     spk_neuron['cv'] = cv
 
-    measures_layer['cv'] = spk_neuron.groupby(['layer'])['cv'].mean()
+    measures_layer['cv'] = spk_neuron.groupby(['layer'], observed=False)['cv'].mean()
 
     # barplot of mean CV
     plt.subplot2grid((3,2),(1,1))
