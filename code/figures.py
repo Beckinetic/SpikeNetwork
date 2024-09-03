@@ -139,9 +139,9 @@ def createfig2(tsim, filename):
                         vert = False, rot = 30, ax = axes[0,1],
                         patch_artist=True, sym='+', return_type='dict', grid=False)
 
-    [bplot[0]['boxes'].iloc[i].set_facecolor(dotcolor) for i in range(0,len(bplot[0]['boxes']))]
-    [bplot[0]['means'].iloc[i].set_markerfacecolor('white') for i in range(0,len(bplot[0]['boxes']))]
-    [bplot[0]['means'].iloc[i].set_markeredgecolor('k') for i in range(0,len(bplot[0]['boxes']))]
+    [bplot[0]['boxes'].set_facecolor(dotcolor) for i in range(0,len(bplot[0]['boxes']))]
+    [bplot[0]['means'].set_markerfacecolor('white') for i in range(0,len(bplot[0]['boxes']))]
+    [bplot[0]['means'].set_markeredgecolor('k') for i in range(0,len(bplot[0]['boxes']))]
 
     axes[0,1].set_title("")
     axes[0,1].set_ylabel("")
