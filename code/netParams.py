@@ -26,7 +26,7 @@ from brian2 import *
 ###############################################################################
 # Population size per layer
 #          2/3e   2/3i   4e    4i    5e    5i    6e     6i    Th
-n_layer = [int(20683*0.6), int(5834*0.6), int(21915*0.6), int(5479*0.6), int(4850*0.6), int(1065*0.6), int(14395*0.6), int(2948*0.6), int(902*0.6)]
+n_layer = [int(20683*0.8), int(5834*0.8), int(21915*0.8), int(5479*0.8), int(4850*0.8), int(1065*0.8), int(14395*0.8), int(2948*0.8), int(902*0.8)]
 
 # Total cortical Population
 N = sum(n_layer[:-1])
