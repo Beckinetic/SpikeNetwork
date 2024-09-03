@@ -264,6 +264,9 @@ def createfig5(tsim, filename):
         n_sample = 1000 # number of neurons by layer for sampled measures
         spk_neuron = spk_neuron.groupby(['layer']).apply(lambda x: x.sample(n=1000))
 
+        # Reset the index to remove the ambiguity
+        spk_neuron = spk_neuron.reset_index(drop=True)
+
         # measures DataFrame:
         measures_layer = pd.DataFrame(index=lname)
 
@@ -363,6 +366,9 @@ def createfig5_hist(tsim):
         n_sample = 1000 # number of neurons by layer for sampled measures
         spk_neuron = spk_neuron.groupby(['layer']).apply(lambda x: x.sample(n=n_sample))
 
+        # Reset the index to remove the ambiguity
+        spk_neuron = spk_neuron.reset_index(drop=True)
+
         # cleaning variables
         del keys, values, ukeys, index, arrays
 
@@ -447,6 +453,9 @@ def datafig6(tsim):
             # sampling data
             n_sample = 1000 # number of neurons by layer for sampled measures
             spk_neuron = spk_neuron.groupby(['layer']).apply(lambda x: x.sample(n=n_sample))
+
+            # Reset the index to remove the ambiguity
+            spk_neuron = spk_neuron.reset_index(drop=True)
 
             # measures DataFrame:
             measures_layer = pd.DataFrame(index=lname)
