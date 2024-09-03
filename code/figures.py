@@ -246,7 +246,11 @@ def createfig5(tsim, filename):
         arrays=np.split(values,index[1:])
 
         spk_neuron = pd.DataFrame({'i':range(0,N),'t':[[]]*N})
-        spk_neuron.iloc[ukeys.astype(int),1] = arrays
+
+        # DEPRECATED: List of arrays cannot be directly assigned to dataframe
+        # spk_neuron.iloc[ukeys.astype(int),1] = arrays
+        for neuron_index, spike_times in zip(ukeys.astype(int), arrays):
+            spk_neuron.at[neuron_index, 't'] = spike_times.tolist()
 
         # creating a flag to identify cortical layers
         spk_neuron['layer'] = pd.cut(spk_neuron['i'], l_bins, labels=lname, right=False)
@@ -346,7 +350,10 @@ def createfig5_hist(tsim):
         arrays=np.split(values,index[1:])
 
         spk_neuron = pd.DataFrame({'i':range(0,N),'t':[[]]*N})
-        spk_neuron.iloc[ukeys.astype(int),1] = arrays
+        # DEPRECATED: List of arrays cannot be directly assigned to dataframe
+        # spk_neuron.iloc[ukeys.astype(int),1] = arrays
+        for neuron_index, spike_times in zip(ukeys.astype(int), arrays):
+            spk_neuron.at[neuron_index, 't'] = spike_times.tolist()
 
         # creating a flag to identify cortical layers
         spk_neuron['layer'] = pd.cut(spk_neuron['i'], l_bins, labels=lname, right=False)
@@ -428,7 +435,10 @@ def datafig6(tsim):
             arrays=np.split(values,index[1:])
 
             spk_neuron = pd.DataFrame({'i':range(0,N),'t':[[]]*N})
-            spk_neuron.iloc[ukeys.astype(int),1] = arrays
+            # DEPRECATED: List of arrays cannot be directly assigned to dataframe
+            # spk_neuron.iloc[ukeys.astype(int),1] = arrays
+            for neuron_index, spike_times in zip(ukeys.astype(int), arrays):
+                spk_neuron.at[neuron_index, 't'] = spike_times.tolist()
 
             # creating a flag to identify cortical layers
             spk_neuron['layer'] = pd.cut(spk_neuron['i'], l_bins, labels=lname, right=False)
@@ -803,7 +813,10 @@ def createfig7(tsim, filename):
     arrays=np.split(values,index[1:])
 
     spk_neuron = pd.DataFrame({'i':range(0,N),'t':[[]]*N})
-    spk_neuron.iloc[ukeys.astype(int),1] = arrays
+    # DEPRECATED: List of arrays cannot be directly assigned to dataframe
+    # spk_neuron.iloc[ukeys.astype(int),1] = arrays
+    for neuron_index, spike_times in zip(ukeys.astype(int), arrays):
+        spk_neuron.at[neuron_index, 't'] = spike_times.tolist()
 
     # creating a flag to identify cortical layers
     spk_neuron['layer'] = pd.cut(spk_neuron['i'], l_bins, labels=lname, right=False)
