@@ -30,7 +30,7 @@ def runParams(tsim=1.0, bg_type=0, stim=0, w_ex=87.8, g=4.0, bg_freq=8.0, nsyn_t
     ###############################################################################
     # Simulation parameters
     ###############################################################################
-    defaultclock.dt = 0.5*ms    # timestep of numerical integration method
+    defaultclock.dt = 0.1*ms    # timestep of numerical integration method
 
     # neuron model
     eqs = neuronMod.LIFmodel
