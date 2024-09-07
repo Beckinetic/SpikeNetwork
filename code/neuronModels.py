@@ -21,13 +21,15 @@
 
 from brian2 import *
 
+
 def LIFparams():
-	tau_m   = 10.0*ms		# membrane time constant
-	tau_ref = 2.0*ms		# absolute refractory period
-	Cm      = 250.0*pF		# membrane capacity
-	v_r     = -65.0*mV		# reset potential
-	v_th    = -50.0*mV		# fixed firing threshold
-	return tau_m, tau_ref, Cm, v_r, v_th
+    tau_m = 10.0 * ms  # membrane time constant
+    tau_ref = 2.0 * ms  # absolute refractory period
+    Cm = 250.0 * pF  # membrane capacity
+    v_r = -65.0 * mV  # reset potential
+    v_th = -50.0 * mV  # fixed firing threshold
+    return tau_m, tau_ref, Cm, v_r, v_th
+
 
 # Leaky integrate-and-fire model equations
 # dv/dt: equation 1 from the article
