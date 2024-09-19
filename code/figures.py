@@ -891,8 +891,8 @@ def createfig7(tsim, filename):
 
     for i in range(0,len(lname),2):
         plt.subplot2grid((4,3),(i/2,1),colspan=2)
-        plt.plot(np.arange(-10,30,0.5),measures_layer.spk_count[i][0][1380:1460], ls='steps', label=lname[i])
-        plt.plot(np.arange(-10,30,0.5),measures_layer.spk_count[i+1][0][1380:1460], ls='steps', label=lname[i+1])
+        plt.step(np.arange(-10, 30, 0.5), measures_layer.spk_count[i][0][1380:1460], label=lname[i])
+        plt.step(np.arange(-10, 30, 0.5), measures_layer.spk_count[i + 1][0][1380:1460], label=lname[i + 1])
         plt.legend()
         if i != 6:
             ax = plt.gca()
